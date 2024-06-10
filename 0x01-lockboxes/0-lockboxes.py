@@ -1,35 +1,26 @@
 #!/usr/bin/python3
-
 """
-You have n number of locked boxes in front of you. Each box is numbered sequentially from 0 to n - 1 and each box may contain keys to the other boxes.
-
-Write a method that determines if all the boxes can be opened.
-
-Prototype: def canUnlockAll(boxes)
-boxes is a list of lists
-A key with the same number as a box opens that box
-You can assume all keys will be positive integers
-There can be keys that do not have boxes
-The first box boxes[0] is unlocked
-Return True if all boxes can be opened, else return False
-
+Solution to lockboxes problem
 """
+
+
 def canUnlockAll(boxes):
-    '''
-    Checks if all boxes can in a list of boxes containing keys
-    (indices) to other boxes can be unlocked give that the first box is unlocked.
-    '''
+    """
+    Determines whether a series of locked boxes can be opened
+    based on keys that can be attained.
+    Solution to the lockboxes problem
+    """
+    if (type(boxes)) is not list:
+        return False
+    elif (len(boxes)) == 0:
+        return False
 
-    n = len(boxes)
-    seen_boxes = set([0])
-    unseen_boxes = set(boxes[0]).difference(seen_boxes)
-
-    while len(unseen_boxes) > 0:
-        box = unseen_boxes.pop()
-        if not box or box >= n or box < 0:
-            continue
-        if box not in seen_boxes:
-            unseen_boxes = unseen_boxes.union(boxes[box])
-            seen_boxes.add(box)
-
-    return len(seen_boxes) == n
+    for k in range(1, len(boxes) - 1):
+        boxes_checked = False
+        for idx in range(len(boxes)):
+            boxes_checked = k in boxes[idx] and k != idx
+            if boxes_checked:
+                break
+        if boxes_checked is False:
+            return boxes_checked
+    return True
