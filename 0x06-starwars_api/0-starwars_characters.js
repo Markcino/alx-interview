@@ -28,7 +28,7 @@ async function main () {
 
   if (args.length < 3) return;
 
-  const movieUrl = 'https://swapi-api.alx-tools.com/api/films/' + args[2];
+  const movieUrl = 'https://swapi-api.alx-tools.com/api/films/' + args[3];
   const movie = await makeRequest(movieUrl);
 
   if (movie.characters === undefined) return;
